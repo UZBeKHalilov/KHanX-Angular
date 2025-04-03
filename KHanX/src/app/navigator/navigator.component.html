@@ -1,0 +1,83 @@
+<div class="app-container">
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <!-- Menu Button -->
+    <div class="menu-button">
+      <i class="fa fa-bars"></i>
+    </div>
+    
+    <!-- Main Navigation -->
+    <div class="nav-items">
+      @for (item of navItems; track item.id) {
+        <div 
+          class="nav-item" 
+          [ngClass]="{'active': selectedNav === item.id}"
+          (click)="selectNav(item.id)"
+        >
+          <div class="nav-icon">
+            <i class="{{item.icon}}"></i>
+            @if (item.badge) {
+              <span class="badge">{{item.badge}}</span>
+            }
+          </div>
+          <div class="nav-label">{{item.label}}</div>
+        </div>
+      }
+    </div>
+    
+    <!-- Edit Button -->
+    <div class="edit-button">
+      <i class="fa fa-sliders"></i>
+      <div class="edit-label">Edit</div>
+    </div>
+  </div>
+  
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" placeholder="Search" class="search-input" />
+      <button class="search-button">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    
+    <!-- Content List -->
+    <div class="content-list">
+      @if (selectedNav === 'hr') {
+        @for (item of hrItems; track item.id) {
+          <a [routerLink]="[item.route]" routerLinkActive="active-item" class="list-item">
+            <div class="item-avatar">
+              <i class="{{item.icon}}"></i>
+            </div>
+            <div class="item-content">
+              <div class="item-title">{{item.title}}</div>
+            </div>
+            <div class="item-actions">
+              <i class="fa fa-chevron-right"></i>
+            </div>
+          </a>
+        }
+      }
+      
+      @if (selectedNav === 'wms') {
+        @for (item of wmsItems; track item.id) {
+          <a [routerLink]="[item.route]" routerLinkActive="active-item" class="list-item">
+            <div class="item-avatar">
+              <i class="{{item.icon}}"></i>
+            </div>
+            <div class="item-content">
+              <div class="item-title">{{item.title}}</div>
+            </div>
+            <div class="item-actions">
+              <i class="fa fa-chevron-right"></i>
+            </div>
+          </a>
+        }
+      }
+    </div>
+  </div>
+  
+  <!-- Right Pattern Area (optional) -->
+  <div class="pattern-area"></div>
+</div>
